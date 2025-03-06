@@ -2,3 +2,14 @@
 
 This repository contains tutorials and useful scripts for processing and
 visualising data from the MOOSE application Cardinal.
+
+## Install `pyvista` for Jupyter
+To get interactive plotting windows in Jupyter notebooks install `pyvista` with the `jupyter` optional dependency.
+`pip install pyvista[jupyter]`
+
+## Repository structure
+* pebble_cht
+  * `pebble.exo`: fluid mesh file from Cubit.
+  * `pebble.nek5000` and `pebble0.f0000*`: results data from nekRS.
+  * `solid_out.e`: results from MOOSE thermal conduction solve.
+* `pebble_laminar.ipynb`: Jupyter notebook with a basic introduction of to Pyvista and Cardinal.
