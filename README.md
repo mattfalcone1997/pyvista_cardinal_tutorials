@@ -1,26 +1,23 @@
 # Using PyVista to post-process amd visualise data from Cardinal
 
-This repository contains tutorials and useful scripts for processing and
-visualising data from the MOOSE application Cardinal.
+This repository contains tutorials and useful scripts for processing and visualising data from the MOOSE application Cardinal. Pyvista documentaion can be found [here](https://docs.pyvista.org/).
 
 ## Install `pyvista` for Jupyter
-To get interactive plotting windows in Jupyter notebooks install `pyvista` with the `jupyter` optional dependency.
-`pip install pyvista[jupyter]`
+To get interactive plotting windows in Jupyter notebooks install `pyvista` with the `all` optional dependency.
+`pip install pyvista[all]`
 
 ## Repository structure
 * pebble_cht
   * `pebble.exo`: fluid mesh file from Cubit.
   * `pebble.nek5000` and `pebble0.f0000*`: results data from nekRS.
   * `solid_out.e`: results from MOOSE thermal conduction solve.
-* vtk_build_openmp
-  * `build_wheel.sh`: Script to install threaded version of VTK. `vtk_options.cmake` should be in the same directory.
-  * `vtk_options.cmake`: Cmake configuration file for threaded VTK build.
-  * `pyvista_parallel.def`: Singularity container definition file installing pyvista with the threaded VTK build.
-* `pebble_laminar.ipynb`: Jupyter notebook with a basic introduction of to Pyvista and Cardinal.
-* `high_order.ipynb`: Jupyter notebook showing how to convert nekRS data to use high-order Lagrange elements.
-
-## Todo's
-* [x] Add script with OpenMP build of VTK
-* [x] Add singularity container with parallel VTK install
-* [ ] Add Pyvista tutorial replicating the layered binned side average from the pebble example.
-* [ ] Add tutorial using direct access to point and cell data.
+* turbChannel
+  * `turbChannel.nek5000.gz` and `turbChannel0.f0000*.gz` gzipped turbulent channel flow data.
+* turbPipe
+  * `turbPipe.nek5000.gz` and `turbPipe0.f0000*.gz` gzipped turbulent pipe flow data.
+* vtk_build_openmp: directory containing scipts for installing VTK from source. More info found [here](vtk_build_openmp/README.md).
+* [`pebble_laminar.ipynb`](pebble_laminar.ipynb): Jupyter notebook with a basic introduction of to Pyvista and Cardinal.
+* [`visualising_vortices.ipynb`](visualising_vortices.ipynb): Jupyter notebook using direct access to data arrays to show vortices in turbulent channel flow.
+* [`skin_friction.ipynb`](skin_friction.ipynb): Jupyter notebook using direct access to data arrays to compute the skin friction coefficient of turbulent pipe flow.
+* [`high_order.ipynb`](high_order.ipynb): Jupyter notebook showing how to convert nekRS data to use high-order Lagrange elements.
+* pyvista_cardinal_talk.pdf: Presentation highlighting some key features from `pyvista` and their application to Cardinal.
