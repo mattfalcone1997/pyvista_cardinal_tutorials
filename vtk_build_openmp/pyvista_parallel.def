@@ -11,7 +11,7 @@ Stage: build
     # Ensure VTK Python has access to VTK shared object libraries
     # TODO: There should be a way to ensure these are copied into the python
     #       vtkmodules folder during build
-    export LD_LIBRARY_PATH=/opt/VTK/VTK-9.3.1/build/build/lib.linux-x86_64-cpython-310/vtkmodules
+    export LD_LIBRARY_PATH=/opt/VTK/VTK-9.4.2/build/build/lib.linux-x86_64-cpython-310/vtkmodules
 
 %post
     # install VTK from source
@@ -19,7 +19,7 @@ Stage: build
     ## set environemnt variables for VTK build
     export CMAKE_CONFIGURATION=openmp_python
     export PYTHON_PREFIX=/usr
-    export VTK_VERSION=9.3.1
+    export VTK_VERSION=9.4.2
 
     ## install pre-requisites
     apt-get update
@@ -47,7 +47,7 @@ Stage: build
 %runscript
     # Run python with command line arguments passed
     # use `singularity run pyvista_parallel.sif <filename.py>`
-    echo -e "Container running: /usr/bin/python $@"
+    echo "Container running: /usr/bin/python $@"
     /usr/bin/python $@
 
 %test
