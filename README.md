@@ -8,8 +8,8 @@ To get interactive plotting windows in Jupyter notebooks install `pyvista` with 
 
 ## Repository structure
 * pebble_cht
-  * `pebble.exo`: fluid mesh file from Cubit.
-  * `pebble.nek5000` and `pebble0.f0000*`: results data from nekRS.
+  * `pebble.exo.gz`: gzipped fluid mesh file from Cubit.
+  * `pebble.nek5000.gz` and `pebble0.f0000*.gz`: gzipped results data from nekRS.
   * `solid_out.e`: results from MOOSE thermal conduction solve.
 * turbChannel
   * `turbChannel.nek5000.gz` and `turbChannel0.f0000*.gz` gzipped turbulent channel flow data.
