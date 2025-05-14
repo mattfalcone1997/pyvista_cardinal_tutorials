@@ -119,7 +119,7 @@ def reorder_points_2d(n):
     return np.array([x + y*npoints + npoints*npoints*z for x, y, z in coords])
 
 
-def to_lagrange_hexahedron(data: pv.UnstructuredGrid) -> pv.UnstructuredGrid:
+def to_lagrange(data: pv.UnstructuredGrid) -> pv.UnstructuredGrid:
     """Takes input Unstructured grid from nekRS and returns a new unstructured grid
       with high-order lagrange elements.
 
@@ -133,14 +133,27 @@ def to_lagrange_hexahedron(data: pv.UnstructuredGrid) -> pv.UnstructuredGrid:
     pv.UnstructuredGrid
         data from NekRS with high-order elements
     """
+
+    threeD = data.get_cell(0).type == pv.CellType.HEXAHEDRON
+
     n_elements = data.cell_data['spectral element id'].max()+1
     element = data.extract_values(values=0,
                                   preference='cell',
                                   scalars='spectral element id')
     n_points = element.n_points
-    order = int(np.cbrt(n_points) - 1)
+
+    if threeD:
+        order = int(np.cbrt(n_points) - 1)
+        index_mapper = reorder_points_3d(order)
+        cell_type = pv.CellType.LAGRANGE_HEXAHEDRON
+        print("Converting hexahedral data")
+    else:
+        order = int(np.sqrt(n_points) - 1)
+        index_mapper = reorder_points_2d(order)
+        cell_type = pv.CellType.LAGRANGE_QUADRILATERAL
+        print("Converting quadrilateral data")
+
     scalars = data.point_data.keys()
-    index_mapper = reorder_points_3d(order)
 
     # prepare point data for reordering
     point_data = {}
@@ -157,7 +170,7 @@ def to_lagrange_hexahedron(data: pv.UnstructuredGrid) -> pv.UnstructuredGrid:
         element = data.extract_values(values=i,
                                     preference='cell',
                                     scalars='spectral element id')
-        hex_cell = vtk.vtkLagrangeHexahedron()
+        hex_cell = vtk.vtkLagrangeHexahedron() if threeD else vtk.vtkLagrangeQuadrilateral()
         hex_cell.GetPointIds().SetNumberOfIds(element.n_points)
         hex_cell.GetPoints().SetNumberOfPoints(element.n_points)
 
@@ -177,7 +190,7 @@ def to_lagrange_hexahedron(data: pv.UnstructuredGrid) -> pv.UnstructuredGrid:
         hex_array.InsertNextCell(hex_cell)
 
     new_grid.SetPoints(new_points)
-    new_grid.SetCells(pv.CellType.LAGRANGE_HEXAHEDRON, hex_array)
+    new_grid.SetCells(cell_type, hex_array)
 
     for scalar in scalars:
         new_grid.point_data[scalar] = point_data[scalar]
