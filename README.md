@@ -1,6 +1,6 @@
 # Using PyVista to post-process amd visualise data from Cardinal
 
-This repository contains tutorials and useful scripts for processing and visualising data from the MOOSE application Cardinal. Pyvista documentaion can be found [here](https://docs.pyvista.org/).
+This repository contains tutorials and useful scripts for processing and visualising data from the MOOSE application Cardinal. Pyvista documentaion can be found [here](https://docs.pyvista.org/). You should start with the `pebble_laminar.ipynb` example. The others are doable in any order.
 
 ## Install `pyvista` for Jupyter
 To get interactive plotting windows in Jupyter notebooks install `pyvista` with the `all` optional dependency.
@@ -19,7 +19,8 @@ To get interactive plotting windows in Jupyter notebooks install `pyvista` with 
 * [`pebble_laminar.ipynb`](pebble_laminar.ipynb): Jupyter notebook with a basic introduction of to Pyvista and Cardinal.
 * [`visualising_vortices.ipynb`](visualising_vortices.ipynb): Jupyter notebook using direct access to data arrays to show vortices in turbulent channel flow.
 * [`skin_friction.ipynb`](skin_friction.ipynb): Jupyter notebook using direct access to data arrays to compute the skin friction coefficient of turbulent pipe flow.
-* high_order: shows how one may use high-order lagrange elements to represent NekRS data
+* [`pyvista_matplotlib.ipynb`](pyvista_matplotlib.ipynb): Notebook showing how Pyvista can be combined with matplotlib to produce publication quality figures.
+* high_order: shows how one may use high-order lagrange elements to represent NekRS data. Come here to feel sad!
   * [`high_order.ipynb`](high_order/high_order.ipynb): Jupyter notebook showing how to convert nekRS data to use high-order Lagrange elements.
   * [`lagrange_convert.py`](high_order/lagrange_convert.py): Module with functions to convert data from NekRS to use high-order Lagrange elements.
 * pyvista_cardinal_talk.pdf: Presentation highlighting some key features from `pyvista` and their application to Cardinal.
