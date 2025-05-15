@@ -2,6 +2,7 @@
 
 This repository contains tutorials and useful scripts for processing and visualising data from the MOOSE application Cardinal. Pyvista documentaion can be found [here](https://docs.pyvista.org/). You should start with the `pebble_laminar.ipynb` example. The others are doable in any order.
 
+If you have any suggestions, examples you wish to add or issues, please raise an issue or PR.
 ## Install `pyvista` for Jupyter
 To get interactive plotting windows in Jupyter notebooks install `pyvista` with the `all` optional dependency.
 `pip install pyvista[all]`
